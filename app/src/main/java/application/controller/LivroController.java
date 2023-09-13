@@ -36,10 +36,12 @@ public class LivroController {
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insert(
         @RequestParam("titulo") String titulo,
-        @RequestParam("isbn") String isbn) {
+        @RequestParam("isbn") String isbn,
+        @RequestParam("genero") int idGenero) {
         Livro livro = new Livro();
         livro.setTitulo(titulo);
         livro.setIsbn(isbn);
+        livro.setGenero(generoRepo.findById(idGenero).get());
 
         livroRepo.save(livro);
         return "redirect:/livro/list";
